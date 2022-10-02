@@ -4,8 +4,11 @@ public class TicketManager {
     public TicketManager(TicketRepository repo) {
         this.repo = repo;
     }
+    public void addTicket(Ticket ticket){
+        repo.addTicket(ticket);
+    }
 
-    public Ticket[] findAll(String from, String to) {
+    public Ticket[] findAll(String from, String to) { // поиск бвсех билетов с выборкой по отправлению и прилету.
         Ticket[] tmp = new Ticket[getCountMatchedTicketForArgs(from, to)];
         int index = 0;
         for (Ticket ticket : repo.getAllTicket()) {
@@ -30,7 +33,7 @@ public class TicketManager {
 
 
     private boolean matches(Ticket ticket, String from, String to) {
-        if (ticket.getAerOut().contains(from) & ticket.getAerIn().contains(to)) {
+        if (ticket.getAerOut().contains(from) && ticket.getAerIn().contains(to)) {
             return true;
         } else {
             return false;
