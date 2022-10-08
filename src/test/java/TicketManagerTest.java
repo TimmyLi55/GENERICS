@@ -15,7 +15,7 @@ public class TicketManagerTest {
     Ticket ticket6 = new Ticket(6, 5500, "OMS", "SVO", 3);
 
     @Test
-    public void FindTest(){
+    public void FindSomeTest(){
 
         manager.addTicket(ticket1);
         manager.addTicket(ticket2);
@@ -25,6 +25,31 @@ public class TicketManagerTest {
         manager.addTicket(ticket6);
 
         Ticket[] expected = {ticket3,ticket6,ticket5};
+        Ticket[] actual = manager.findAll("OMS","SVO");
+        Arrays.sort(actual);
+        Assertions.assertArrayEquals(expected,actual);
+    }
+    @Test
+    public void FindOneTicketTest(){
+
+        manager.addTicket(ticket1);
+        manager.addTicket(ticket2);
+        manager.addTicket(ticket4);
+        manager.addTicket(ticket5);
+
+        Ticket[] expected = {ticket5};
+        Ticket[] actual = manager.findAll("OMS","SVO");
+        Arrays.sort(actual);
+        Assertions.assertArrayEquals(expected,actual);
+    }
+    @Test
+    public void FindZeroTicketTest(){
+
+        manager.addTicket(ticket1);
+        manager.addTicket(ticket2);
+        manager.addTicket(ticket4);
+
+        Ticket[] expected = {};
         Ticket[] actual = manager.findAll("OMS","SVO");
         Arrays.sort(actual);
         Assertions.assertArrayEquals(expected,actual);
